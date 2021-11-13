@@ -1,1 +1,1 @@
-alert('JS. Works')
+// alert('JS. Works')
