@@ -1,3 +1,20 @@
+main {
+    text-align: center;
+}
+
 h1 {
     color: blue;
+}
+
+#board {
+    height: 650px;
+    width: 650px;
+    margin: 0 auto;
+}
+
+.tile {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    background-color: gray;
 }
