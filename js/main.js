@@ -42,11 +42,13 @@ const init = () => {
         name: 'Player 1',
         // indeces of cells occupied 
         cells: [],
+        color: '#FF615F'
     }
     player2 = {
         name: 'Player 2',
         // indeces of cells occupied 
         cells: [],
+        color: '#3DC5F2'
     }
     // add event listeners to the board.
     boardEl = document.querySelector('#board');
@@ -54,6 +56,7 @@ const init = () => {
     // REMEMBER BUBBLING. Apply listener to board component.
     // Maybe make a loop instead? Hmm... 
     // Play the game.
+    changeBackground();
 
 };
 
@@ -87,6 +90,7 @@ function handleClick(e){
     // render;
     render(clickedIndex);
     flipTurn();
+    changeBackground();
     // Check win condition.
 }
 
@@ -127,8 +131,6 @@ function render(cellIndex){
 }
 
 // Check if win conditions met by player. Should be triggered every move.
-
-
 // Horizontal win, 0 1 2 , 3 4 5, 6 7 8
 function checkHorizontal(){
     if ((boardArr[0] === 1 && boardArr[1] === 1 && boardArr[2] === 1) ||
@@ -190,6 +192,18 @@ function checkWin() {
 function displayWinner(){
     const winnerEl = document.querySelector('#winner');
     winnerEl.innerText = `Player ${winner} wins!`
+}
+
+// function to change background based on player's turn.
+function changeBackground(){
+    const mainClass = document.querySelector('main');
+    if (turnCurr === 1){
+       mainClass.classList.add('player-1-turn');
+       mainClass.classList.remove('player-2-turn');
+    } else if (turnCurr === 2) {
+        mainClass.classList.add('player-2-turn');
+        mainClass.classList.remove('player-1-turn');
+    }
 }
 
 init();
