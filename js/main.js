@@ -44,7 +44,7 @@ const init = () => {
         cells: [],
     }
     player2 = {
-        name: 'Player 1',
+        name: 'Player 2',
         // indeces of cells occupied 
         cells: [],
     }
@@ -65,7 +65,6 @@ const init = () => {
 // Flip the "turn table".
 // Wait for player 2's turn or click.
 // Add 1 to turnNum2.
-// Keep going while there is no winner.
 
 // event listener 1. Handle click.
 function handleClick(e){
@@ -77,7 +76,14 @@ function handleClick(e){
     const arrIndexValue = boardArr[clickedIndex];
     if (boardArr[clickedIndex] === 0){
         boardArr[clickedIndex] = turnCurr;
+        // Push clickedIndex into player's occupied cells array.
+        if (turnCurr == 1) {
+            player1.cells.push(clickedIndex);
+        } else {
+            player2.cells.push(clickedIndex);
+        }
     }
+    checkWin();
     // render;
     render(clickedIndex);
     flipTurn();
@@ -116,12 +122,71 @@ function render(cellIndex){
 }
 
 // Check if win conditions met by player. Should be triggered every move.
-function checkWin(player) {
-    // Winning condition is if player has the following cells occupied:
-    // Horizontal win, 0 1 2 , 3 4 5, 6 7 8
-    // Vertical Win,   0 3 6, 1 4 7, 2 5 8
-    // Diagonal Win, 0 4 8, 2 4 6
+
+
+// Horizontal win, 0 1 2 , 3 4 5, 6 7 8
+function checkHorizontal(){
+    if ((boardArr[0] === 1 && boardArr[1] === 1 && boardArr[2] === 1) ||
+        (boardArr[3] === 1 && boardArr[4] === 1 && boardArr[5] === 1) || 
+        (boardArr[6] === 1 && boardArr[7] === 1 && boardArr[8] === 1)){
+        // player 1 wins
+        console.log('PLayer 1 won');
+        return '1';
+    } else if ((boardArr[0] === 2 && boardArr[1] === 2 && boardArr[2] === 2) ||
+    (boardArr[3] === 2 && boardArr[4] === 2 && boardArr[5] === 2) || 
+    (boardArr[6] === 2 && boardArr[7] === 2 && boardArr[8] === 2)){
+        // player 2 wins
+        console.log('PLayer 2 won');
+        return '2;'
+    }
 }
 
+// Vertical Win,   0 3 6, 1 4 7, 2 5 8
+function checkVertical(){
+    if ((boardArr[0] === 1 && boardArr[3] === 1 && boardArr[6] === 1) ||
+        (boardArr[1] === 1 && boardArr[4] === 1 && boardArr[7] === 1) || 
+        (boardArr[2] === 1 && boardArr[5] === 1 && boardArr[8] === 1)){
+        // player 1 wins
+        console.log('PLayer 1 won');
+        return '1';
+    } else if ((boardArr[0] === 2 && boardArr[3] === 2 && boardArr[6] === 2) ||
+        (boardArr[1] === 2 && boardArr[4] === 2 && boardArr[7] === 2) || 
+        (boardArr[2] === 2 && boardArr[5] === 2 && boardArr[8] === 2)){
+        // player 2 wins
+        console.log('PLayer 2 won');
+        return '2;'
+    }
+}
+
+
+// Diagonal Win, 0 4 8, 2 4 6
+function checkDiagonal(){
+    if ((boardArr[0] === 1 && boardArr[3] === 1 && boardArr[6] === 1) ||
+        (boardArr[1] === 1 && boardArr[4] === 1 && boardArr[7] === 1)){
+        // player 1 wins
+        console.log('PLayer 1 won');
+        return '1';
+    } else if ((boardArr[0] === 2 && boardArr[4] === 2 && boardArr[8] === 2) ||
+        (boardArr[2] === 2 && boardArr[4] === 2 && boardArr[6] === 2)){
+        // player 2 wins
+        console.log('PLayer 2 won');
+        return '2;'
+    }
+}
+
+
+function checkWin() {
+    let tempWinner;
+    // Winning condition is if player has the following cells occupied:
+    // Horizontal win
+    tempWinner = checkHorizontal();
+    // Vertical win
+    tempWinner = checkVertical();
+    // Diagonal win
+    tempWinner = checkDiagonal();
+    if (tempWinner){
+        winner = tempWinner;
+    }
+}
 
 init();
