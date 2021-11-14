@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 main {
     text-align: center;
 }
@@ -7,9 +9,13 @@ h1 {
 }
 
 #board {
-    height: 650px;
-    width: 650px;
+    height: 630px;
+    width: 630px;
     margin: 0 auto;
+    font-family: 'Poppins';
+    background: black;
+    border: 4px solid black;
+    justify-content: center;
 }
 
 .tile {
@@ -17,4 +23,19 @@ h1 {
     height: 200px;
     display: inline-block;
     background-color: gray;
+    border: 2px solid black;
+    margin: none;
+}
+.x {
+    background-image: url('./assets/x.png');
+}
+
+.o {
+    background-image: url('./assets/o.png');
+}
+
+.clicked {
+    background-size: 200px 200px;
+    background-repeat: 'no-repeat';
+    background-position: center;
 }
