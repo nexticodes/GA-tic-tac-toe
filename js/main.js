@@ -27,8 +27,8 @@ let winner; // the winner;
 let boardEl;
 
 // Initialize game 
-let player1 = 'Player 1' // (prompt('Player 1. Enter your name: '));
-let player2 = 'Player 2' // (prompt('Player 2. Enter your name: ')) ;
+let player1; // (prompt('Player 1. Enter your name: '));
+let player2; // (prompt('Player 2. Enter your name: ')) ;
 
 
 // SET THE STAGE
@@ -37,6 +37,17 @@ const init = () => {
     // set boardArray, set random first turn (use Math.random()), number of turns for 1 and 2. Set winner to 0.
     boardArr = [0,0,0,0,0,0,0,0,0];
     turnCurr = Math.floor(Math.random() * 2 + 1);
+    // set up player object.
+    player1 = {
+        name: 'Player 1',
+        // indeces of cells occupied 
+        cells: [],
+    }
+    player2 = {
+        name: 'Player 1',
+        // indeces of cells occupied 
+        cells: [],
+    }
     // add event listeners to the board.
     boardEl = document.querySelector('#board');
     boardEl.addEventListener('click', handleClick);
@@ -102,6 +113,14 @@ function render(cellIndex){
             clickedCell.classList.add('clicked', 'o');
         }
     }
+}
+
+// Check if win conditions met by player. Should be triggered every move.
+function checkWin(player) {
+    // Winning condition is if player has the following cells occupied:
+    // Horizontal win, 0 1 2 , 3 4 5, 6 7 8
+    // Vertical Win,   0 3 6, 1 4 7, 2 5 8
+    // Diagonal Win, 0 4 8, 2 4 6
 }
 
 
