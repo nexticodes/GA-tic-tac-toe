@@ -45,8 +45,7 @@ const init = () => {
     // Play the game.
 
 };
-init();
-console.log(boardArr);
+
 
 
 // play function.
@@ -60,13 +59,16 @@ console.log(boardArr);
 // event listener 1. Handle click.
 function handleClick(e){
     // Extract the index (VALUE or maybe ID) of the cell.
-    const clickedIndex = e.target.id;
+    const clickedCellId = e.target.id;
+    const clickedIndex = clickedCellId.charAt(clickedCellId.length - 1);
     // Fill board array at extracted index with 1 or 2, depending on whose turn it is.
-    // Check first if taken.
+    // Check first if taken. (if the array at index is not 0, means its taken)
     const arrIndexValue = boardArr[clickedIndex];
-    console.log("Value at array index ", arrIndexValue);
-    boardArr[clickedIndex] = turnCurr;
-    console.log(boardArr);
+    if (boardArr[clickedIndex] === 0){
+        boardArr[clickedIndex] = turnCurr;
+    }
+    // render;
+    render(clickedIndex);
     flipTurn();
     // Check win condition.
 }
@@ -81,9 +83,26 @@ function flipTurn(){
     }
 };
 
-// render board function when a click is made.
-// If it's player 1's turn, replace cell with X.
-// If it's player 2's turn, replace cell with O.
-// MAKE CELL UNCLICKABLE.
-// CHECK FIRST IF VALUE AT INDEX IS EITHER 1 OR 2.
+// render function when a click is made.
+// param: cellIndex, index of the cell clicked 
+function render(cellIndex){
 
+    // Retrieve cell from HTML. Ref: id.
+    const cell = document.querySelector('#cell-8');
+    const clickedCell = document.querySelector(`#cell-${cellIndex}`);
+    // If it's player 1's turn, replace cell with X.
+    // If it's player 2's turn, replace cell with O.
+    // Change background to x or o.
+    // MAKE CELL UNCLICKABLE IF TAKEN.
+    // CHECK FIRST IF VALUE AT INDEX IS EITHER 1 OR 2.
+    if (!clickedCell.classList.contains('clicked')){
+        if (turnCurr === 1) {
+            clickedCell.classList.add('clicked', 'x');
+        } else if (turnCurr === 2){
+            clickedCell.classList.add('clicked', 'o');
+        }
+    }
+}
+
+
+init();
