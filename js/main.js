@@ -67,16 +67,18 @@ function handleClick(e){
     console.log("Value at array index ", arrIndexValue);
     boardArr[clickedIndex] = turnCurr;
     console.log(boardArr);
-    console.log('Before flip ', turnCurr);
     flipTurn();
-    console.log('After flip ', turnCurr);
     // Check win condition.
 }
 
 // flip turn
 function flipTurn(){
-    // negate.
-    turnCurr = !turnCurr;
+    // switch turns
+    if (turnCurr === 1) {
+        turnCurr = 2;
+    } else if (turnCurr === 2) {
+        turnCurr = 1;
+    }
 };
 
 // render board function when a click is made.
