@@ -119,6 +119,11 @@ function render(cellIndex){
             clickedCell.classList.add('clicked', 'o');
         }
     }
+
+    // if there's a winner.
+    if (winner){
+        displayWinner();
+    }
 }
 
 // Check if win conditions met by player. Should be triggered every move.
@@ -130,14 +135,12 @@ function checkHorizontal(){
         (boardArr[3] === 1 && boardArr[4] === 1 && boardArr[5] === 1) || 
         (boardArr[6] === 1 && boardArr[7] === 1 && boardArr[8] === 1)){
         // player 1 wins
-        console.log('PLayer 1 won');
-        return '1';
+        winner = '1';
     } else if ((boardArr[0] === 2 && boardArr[1] === 2 && boardArr[2] === 2) ||
     (boardArr[3] === 2 && boardArr[4] === 2 && boardArr[5] === 2) || 
     (boardArr[6] === 2 && boardArr[7] === 2 && boardArr[8] === 2)){
         // player 2 wins
-        console.log('PLayer 2 won');
-        return '2;'
+        winner = '2';
     }
 }
 
@@ -147,14 +150,12 @@ function checkVertical(){
         (boardArr[1] === 1 && boardArr[4] === 1 && boardArr[7] === 1) || 
         (boardArr[2] === 1 && boardArr[5] === 1 && boardArr[8] === 1)){
         // player 1 wins
-        console.log('PLayer 1 won');
-        return '1';
+        winner = '1';
     } else if ((boardArr[0] === 2 && boardArr[3] === 2 && boardArr[6] === 2) ||
         (boardArr[1] === 2 && boardArr[4] === 2 && boardArr[7] === 2) || 
         (boardArr[2] === 2 && boardArr[5] === 2 && boardArr[8] === 2)){
         // player 2 wins
-        console.log('PLayer 2 won');
-        return '2;'
+        winner = '2';
     }
 }
 
@@ -164,29 +165,31 @@ function checkDiagonal(){
     if ((boardArr[0] === 1 && boardArr[3] === 1 && boardArr[6] === 1) ||
         (boardArr[1] === 1 && boardArr[4] === 1 && boardArr[7] === 1)){
         // player 1 wins
-        console.log('PLayer 1 won');
-        return '1';
+        winner = '1';
     } else if ((boardArr[0] === 2 && boardArr[4] === 2 && boardArr[8] === 2) ||
         (boardArr[2] === 2 && boardArr[4] === 2 && boardArr[6] === 2)){
         // player 2 wins
-        console.log('PLayer 2 won');
-        return '2;'
+        winner = '2';
     }
 }
 
 
 function checkWin() {
-    let tempWinner;
-    // Winning condition is if player has the following cells occupied:
-    // Horizontal win
-    tempWinner = checkHorizontal();
-    // Vertical win
-    tempWinner = checkVertical();
-    // Diagonal win
-    tempWinner = checkDiagonal();
-    if (tempWinner){
-        winner = tempWinner;
+    if (!winner){
+        // Winning condition is if player has the following cells occupied:
+        // Horizontal win
+        tempWinner = checkHorizontal();
+        // Vertical win
+        tempWinner = checkVertical();
+        // Diagonal win
+        tempWinner = checkDiagonal();
     }
+    console.log(winner)
+}
+
+function displayWinner(){
+    const winnerEl = document.querySelector('#winner');
+    winnerEl.innerText = `Player ${winner} wins!`
 }
 
 init();
