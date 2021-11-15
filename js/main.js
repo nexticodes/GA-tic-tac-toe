@@ -63,7 +63,7 @@ function init() {
     // REMEMBER BUBBLING. Apply listener to board component.
     // Maybe make a loop instead? Hmm... 
     // Play the game.
-    changeBackground();
+    updateTurnColors();
 
 };
 
@@ -97,7 +97,7 @@ function handleClick(e){
     // render;
     render(clickedIndex);
     flipTurn();
-    changeBackground();
+    updateTurnColors();
     // Check win condition.
 }
 
@@ -114,7 +114,6 @@ function flipTurn(){
 // render function when a click is made.
 // param: cellIndex, index of the cell clicked 
 function render(cellIndex){
-
     // Retrieve cell from HTML. Ref: id.
     const cell = document.querySelector('#cell-8');
     const clickedCell = document.querySelector(`#cell-${cellIndex}`);
@@ -202,14 +201,21 @@ function displayWinner(){
 }
 
 // function to change background based on player's turn.
-function changeBackground(){
-    const bodyClass = document.querySelector('body');
+function updateTurnColors(){
+    const bodyEl = document.querySelector('body');
+    const playerEl = document.querySelector('.player');
     if (turnCurr === 1){
-       bodyClass.classList.add('player-1-turn');
-       bodyClass.classList.remove('player-2-turn');
+       bodyEl.classList.add('player-1-turn');
+       bodyEl.classList.remove('player-2-turn');
+       playerEl.innerText = 'Player 1';
+       playerEl.classList.remove('player-2');
+       playerEl.classList.add('player-1');
     } else if (turnCurr === 2) {
-        bodyClass.classList.add('player-2-turn');
-        bodyClass.classList.remove('player-1-turn');
+        bodyEl.classList.add('player-2-turn');
+        bodyEl.classList.remove('player-1-turn');
+        playerEl.innerText = 'Player 2';
+        playerEl.classList.add('player-2');
+        playerEl.classList.remove('player-1');
     }
 }
 

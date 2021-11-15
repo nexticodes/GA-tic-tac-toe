@@ -41,6 +41,32 @@ main {
     display: none;
 }
 
+#turn-display{
+    background-color: black;
+    border-radius: 5px;
+    height: 100px;
+    width: 400px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    color: white;
+}
+
+#turn-display h2{
+    font-size: 36px;
+    
+}
+
+.player-1 {
+    color: #FF615F
+}
+
+.player-2 {
+    color: #3DC5F2
+}
+
 #play {
     font-size: 60px;
 }
@@ -54,7 +80,6 @@ main {
     margin-top: 30px;
     margin-bottom: 30px;
     color: white;
-
 }
 
 .modal-content h4 {
@@ -100,13 +125,17 @@ footer {
 #board {
     height: 630px;
     width: 630px;
-    margin: 0 auto;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     background: black;
     border: 4px solid black;
     justify-content: center;
     border-radius: 5px;
     padding-top: 5px;
-    position: relative;
+    position: absolute;
 }
 
 .tile {
