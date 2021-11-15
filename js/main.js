@@ -91,18 +91,19 @@ function handleClick(e){
     if (boardArr[clickedIndex] === 0){
         boardArr[clickedIndex] = turnCurr;
         // Push clickedIndex into player's occupied cells array.
-        if (turnCurr == 1) {
-            player1.cells.push(clickedIndex);
-        } else {
-            player2.cells.push(clickedIndex);
-        }
+        // if (turnCurr == 1) {
+        //     player1.cells.push(clickedIndex);
+        // } else {
+        //     player2.cells.push(clickedIndex);
+        // }
+                // Check win condition.
+        checkWin();
+        // render with the clicked index;
+        render(clickedIndex);
+        // change the turn
+        flipTurn();
     }
-    // Check win condition.
-    checkWin();
-    // render with the clicked index;
-    render(clickedIndex);
-    // change the turn
-    flipTurn();
+
 }
 
 // flip turn
@@ -139,6 +140,10 @@ function render(cellIndex){
     console.log(winner);
     if (winner){
         displayWinner();
+    } else if (winner === 'none') {
+        console.log('draw');
+        // display draw
+        modalController('open', 'draw');
     }
 }
 
@@ -263,6 +268,15 @@ function modalController(command, content){
         modalEl.innerHTML = `
         <h3 id="announce-winner">WINNER<h3>
         <h1 id="winner"></h1>
+        <button id="replay">AGAIN?</button>
+        `
+        const replay = document.getElementById('replay');
+        replay.addEventListener('click', reset);
+    }
+
+    if (content === 'none'){
+        modalEl.innerHTML = `
+        <h2 id="announce-winner">DRAW<h2>
         <button id="replay">AGAIN?</button>
         `
         const replay = document.getElementById('replay');
