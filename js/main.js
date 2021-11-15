@@ -32,7 +32,7 @@ let player2; // (prompt('Player 2. Enter your name: ')) ;
 
 
 // SET THE STAGE
-// Open modal
+// Open modal on init
 modalController('open', 'intro');
 
 // Add listener to button on intro.
@@ -43,7 +43,7 @@ function init() {
     // Close modal and backdrop.
     modalController('close');
     // fill up variables;
-    // set boardArray, set random first turn (use Math.random()), number of turns for 1 and 2. Set winner to 0.
+    // set boardArray, set random first turn (use Math.random()), number of turns for 1 and 2.
     boardArr = [0,0,0,0,0,0,0,0,0];
     turnCurr = Math.floor(Math.random() * 2 + 1);
     // set winner to '';
@@ -98,11 +98,11 @@ function handleClick(e){
         }
     }
     // Check win condition.
-    // render;
     checkWin();
+    // render with the clicked index;
     render(clickedIndex);
+    // change the turn
     flipTurn();
-    updateTurnColors();
 }
 
 // flip turn
@@ -113,6 +113,7 @@ function flipTurn(){
     } else if (turnCurr === 2) {
         turnCurr = 1;
     }
+    updateTurnColors();
 };
 
 // render function when a click is made.
@@ -188,8 +189,8 @@ function checkDiagonal(){
 
 
 function checkWin() {
+    // if winner has not been defined / selected yet.
     if (!winner){
-        // Winning condition is if player has the following cells occupied:
         // Horizontal win
         tempWinner = checkHorizontal();
         // Vertical win
@@ -200,6 +201,7 @@ function checkWin() {
 }
 
 function displayWinner(){
+    // open modal.
     modalController('open', 'winner');
     const winnerEl = document.querySelector('#winner');
     winnerEl.innerText = `PLAYER ${winner}`
@@ -214,6 +216,8 @@ function displayWinner(){
 function updateTurnColors(){
     const bodyEl = document.querySelector('body');
     const playerEl = document.querySelector('.player');
+
+    // If player 1's turn, change the color of the background to player 1's color, vice versa.
     if (turnCurr === 1){
        bodyEl.classList.add('player-1-turn');
        bodyEl.classList.remove('player-2-turn');
@@ -250,6 +254,12 @@ function modalController(command, content){
         `
     }
     if (content === 'winner'){
+        // add event listener to backdrop if winner modal is displayed.
+        // event listener for click should close the modal on click.
+        backdropEl.addEventListener('click', function(){
+            backdropEl.classList.remove('open');
+            modalEl.classList.remove('open');
+        });
         modalEl.innerHTML = `
         <h3 id="announce-winner">WINNER<h3>
         <h1 id="winner"></h1>
