@@ -9,11 +9,20 @@
     <script defer src="./js/main.js"></script>
 </head>
 <body>
-    <main>
-        <header>
+    <div class="backdrop">
+    </div>
+    <modal class="modal">
+        <content class="modal-content" id="intro">
             <h1>Tic Tac Toe</h1>
             <h4>Can you outsmart your opponent?</h4>
-        </header>
+            <button id="play">PLAY</button>
+        </content>
+        <content class="modal-content">
+            <h2 id="winner"></h2>   
+        </content>
+    </modal>
+    <main>
+
         <content>
             <h3 class="announce">It is <span class="player">Player1 / Player2</span>'s turn</h3>
             <!-- board -->
@@ -27,8 +36,7 @@
                 <div class="tile" id="cell-6"></div>
                 <div class="tile" id="cell-7"></div>
                 <div class="tile" id="cell-8"></div>
-            </div>
-            <h2 id="winner"></h2>      
+            </div>   
         </content>
         <footer>
             All rights reserved. Ernest Bruno 2021.

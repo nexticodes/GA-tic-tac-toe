@@ -1,12 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Righteous&display=swap');
 
-main {
-    text-align: center;
+body {
     font-family: 'Righteous';
+    overflow: hidden;
+    height: 100%;
 }
 
-h1 {
-    color: blue;
+main {
+    text-align: center;
+}
+
+.backdrop {
+    background-color: gray;
+    opacity: 0.8;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    /* display: none; */
+}
+
+.modal {
+    position: absolute;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color:white;
+    opacity: 1;
+    z-index: 5;
+    height: 400px;
+    width: 600px;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #292929;
+}
+
+#play {
+    font-size: 60px;
+}
+
+.open {
+    display: block;
+}
+
+.modal-content h1 {
+    font-size: 78px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
+
+}
+
+.modal-content h4 {
+    width: 100%;
+    background-color: black;
+    color: white;
+    height: 50px;
+    padding-top: 25px;
+}
+
+#play {
+    margin-top: 20px;
+    background-color: black;
+    color: azure;
+    padding: 10px;
+    border: none;
+}
+
+#play:hover{
+    box-shadow: 0px 0px 5px white;
+    cursor: pointer;
 }
 
 footer {
@@ -16,6 +84,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 3;
 }
 
 .player-1-turn {
@@ -70,5 +139,9 @@ footer {
     background-size: 200px 200px;
     background-repeat: 'no-repeat';
     background-position: center;
+}
+
+.intro .open {
+    background: gray;
 }
 
