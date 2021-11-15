@@ -5,6 +5,19 @@ main {
     font-family: 'Righteous';
 }
 
+h1 {
+    color: blue;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .player-1-turn {
     background-color: #FF615F;;
 }
@@ -13,9 +26,6 @@ main {
     background-color: #3DC5F2;
 }
 
-h1 {
-    color: blue;
-}
 
 #board {
     height: 630px;
@@ -52,3 +62,4 @@ h1 {
     background-repeat: 'no-repeat';
     background-position: center;
 }
+
