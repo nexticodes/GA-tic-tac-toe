@@ -32,7 +32,14 @@ let player2; // (prompt('Player 2. Enter your name: ')) ;
 
 
 // SET THE STAGE
-const init = () => {
+
+// Add listener to button on intro.
+const playButton = document.getElementById('play');
+playButton.addEventListener('click', init);
+
+function init() {
+    // Close modal and backdrop.
+    modalController('close');
     // fill up variables;
     // set boardArray, set random first turn (use Math.random()), number of turns for 1 and 2. Set winner to 0.
     boardArr = [0,0,0,0,0,0,0,0,0];
@@ -206,4 +213,25 @@ function changeBackground(){
     }
 }
 
-init();
+// modal controller
+function modalController(command, content){
+    const backdropEl = document.querySelector('.backdrop');
+    const modalEl = document.querySelector('.modal');
+    const modalIntroContent = document.querySelector('#modal-intro');
+    const modalWinnerContent = document.querySelector('#modal-content');
+    if (command === 'open'){
+        backdropEl.classList.add('open');
+        modalEl.classList.add('open');
+    } else if (command === 'close'){
+        backdropEl.classList.remove('open');
+        modalEl.classList.remove('open');
+    }
+    // content switcher.
+    if (content === 'intro'){
+        modalIntroContent.classList.add('open');
+        modalWinnerContent.classList.remove('open');
+    } else if (content === 'winner'){
+        modalIntroContent.classList.remove('open');
+        modalWinnerContent.classList.add('open');
+    }
+}

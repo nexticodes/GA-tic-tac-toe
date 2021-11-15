@@ -19,7 +19,7 @@ main {
     top: 0;
     left: 0;
     z-index: 2;
-    /* display: none; */
+    display: none;
 }
 
 .modal {
@@ -38,6 +38,7 @@ main {
     bottom: 0;
     margin: auto;
     background: #292929;
+    display: none;
 }
 
 #play {
