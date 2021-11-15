@@ -32,6 +32,8 @@ let player2; // (prompt('Player 2. Enter your name: ')) ;
 
 
 // SET THE STAGE
+// Open modal
+modalController('open', 'intro');
 
 // Add listener to button on intro.
 const playButton = document.getElementById('play');
@@ -44,6 +46,8 @@ function init() {
     // set boardArray, set random first turn (use Math.random()), number of turns for 1 and 2. Set winner to 0.
     boardArr = [0,0,0,0,0,0,0,0,0];
     turnCurr = Math.floor(Math.random() * 2 + 1);
+    // set winner to '';
+    winner = '';
     // set up player object.
     player1 = {
         name: 'Player 1',
@@ -93,12 +97,12 @@ function handleClick(e){
             player2.cells.push(clickedIndex);
         }
     }
-    checkWin();
+    // Check win condition.
     // render;
+    checkWin();
     render(clickedIndex);
     flipTurn();
     updateTurnColors();
-    // Check win condition.
 }
 
 // flip turn
@@ -131,6 +135,7 @@ function render(cellIndex){
     }
 
     // if there's a winner.
+    console.log(winner);
     if (winner){
         displayWinner();
     }
@@ -192,12 +197,17 @@ function checkWin() {
         // Diagonal win
         tempWinner = checkDiagonal();
     }
-    console.log(winner)
 }
 
 function displayWinner(){
+    modalController('open', 'winner');
     const winnerEl = document.querySelector('#winner');
-    winnerEl.innerText = `Player ${winner} wins!`
+    winnerEl.innerText = `PLAYER ${winner}`
+    if (winner == 1){
+        winnerEl.style.color = player1.color;
+    } else if (winner == 2){
+        winnerEl.style.color = player2.color;
+    }
 }
 
 // function to change background based on player's turn.
@@ -223,21 +233,43 @@ function updateTurnColors(){
 function modalController(command, content){
     const backdropEl = document.querySelector('.backdrop');
     const modalEl = document.querySelector('.modal');
-    const modalIntroContent = document.querySelector('#modal-intro');
-    const modalWinnerContent = document.querySelector('#modal-content');
     if (command === 'open'){
         backdropEl.classList.add('open');
         modalEl.classList.add('open');
-    } else if (command === 'close'){
+    }
+    if (command === 'close'){
         backdropEl.classList.remove('open');
         modalEl.classList.remove('open');
     }
     // content switcher.
     if (content === 'intro'){
-        modalIntroContent.classList.add('open');
-        modalWinnerContent.classList.remove('open');
-    } else if (content === 'winner'){
-        modalIntroContent.classList.remove('open');
-        modalWinnerContent.classList.add('open');
+        modalEl.innerHTML = `
+        <h1 id="intro-title">Tic Tac Toe</h1>
+        <h4 id="intro-subtitle">Can you outsmart your opponent?</h4>
+        <button id="play">PLAY</button>
+        `
     }
+    if (content === 'winner'){
+        modalEl.innerHTML = `
+        <h3 id="announce-winner">WINNER<h3>
+        <h1 id="winner"></h1>
+        <button id="replay">AGAIN?</button>
+        `
+        const replay = document.getElementById('replay');
+        replay.addEventListener('click', reset);
+    }
+}
+
+function reset(){
+    // // Clear tiles
+    // const allTiles = document.querySelectorAll('.tile');
+    // allTiles.forEach(e => {
+    //     e.classList.remove('x');
+    //     e.classList.remove('o');
+    // });
+
+    // // Close modal
+    // modalController('close');
+    // init();
+    window.location.reload();
 }
