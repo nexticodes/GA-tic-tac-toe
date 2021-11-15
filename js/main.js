@@ -196,13 +196,13 @@ function displayWinner(){
 
 // function to change background based on player's turn.
 function changeBackground(){
-    const mainClass = document.querySelector('main');
+    const bodyClass = document.querySelector('body');
     if (turnCurr === 1){
-       mainClass.classList.add('player-1-turn');
-       mainClass.classList.remove('player-2-turn');
+       bodyClass.classList.add('player-1-turn');
+       bodyClass.classList.remove('player-2-turn');
     } else if (turnCurr === 2) {
-        mainClass.classList.add('player-2-turn');
-        mainClass.classList.remove('player-1-turn');
+        bodyClass.classList.add('player-2-turn');
+        bodyClass.classList.remove('player-1-turn');
     }
 }
 

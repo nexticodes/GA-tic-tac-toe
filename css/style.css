@@ -34,6 +34,11 @@ h1 {
     border: 2px solid black;
     margin: none;
 }
+
+.tile:hover {
+    cursor: pointer;
+}
+
 .x {
     background-image: url('./assets/x.png');
 }
